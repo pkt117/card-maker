@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./app";
 import { Firebase, AuthService } from "./service/index";
 
-const authService = new AuthService();
+const authService = new AuthService(Firebase);
 
 ReactDOM.render(
   <React.StrictMode>

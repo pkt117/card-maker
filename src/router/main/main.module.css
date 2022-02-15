@@ -1,3 +1,5 @@
+@value makerWhite from '../../common/colors.css';
+
 .container {
   width: 100%;
   max-width: 1200px;
@@ -5,6 +7,6 @@
 }
 
 .middle {
-  background-color: white;
+  background-color: makerWhite;
   height: 80%;
 }
