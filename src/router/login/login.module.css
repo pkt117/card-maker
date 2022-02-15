@@ -1,0 +1,15 @@
+@value makerWhite from '../../common/colors.css';
+
+.container {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.middle {
+  width: 100%;
+  padding-bottom: 1em;
+  background-color: makerWhite;
+  text-align: center;
+}
