@@ -1,49 +1,27 @@
-import { getDatabase, ref, set, onValue } from "firebase/database";
+import { getDatabase, ref, set, remove, onValue, off } from "firebase/database";
 
 class FirebaseDB {
-  constructor(uid) {
-    this.db = getDatabase();
-    this.uid = uid;
+  constructor(app) {
+    this.db = getDatabase(app);
   }
 
-  upload(name, company, color, title, email, message, profileImg) {
-    let randomNum = Math.floor(Math.random() * 10000000);
-    if (
-      name == "" &&
-      company == "" &&
-      title == "" &&
-      email == "" &&
-      message == ""
-    )
-      return;
-    set(ref(this.db, "users/" + this.uid + `/${randomNum}`), {
-      name,
-      company,
-      color,
-      title,
-      email,
-      message,
-      profileImg,
-      dateTime: Date.now(),
+  syncCard(uid, onUpdate) {
+    const syncRef = ref(this.db, `users/${uid}`);
+    onValue(syncRef, (snapshot) => {
+      const value = snapshot.val();
+      value && onUpdate(value);
     });
+
+    return () => off(syncRef);
   }
 
-  dataList() {
-    const dbRef = ref(this.db, "users/" + this.uid);
-    let list = [];
-    onValue(
-      dbRef,
-      (snapshot) => {
-        snapshot.forEach((childSnapshot) => {
-          list.push(childSnapshot.val());
-        });
-      },
-      {
-        onlyOnce: true,
-      }
-    );
+  upload(uid, card) {
+    set(ref(this.db, `users/${uid}/${card.id}`), card);
+  }
 
-    return list;
+  removeData(uid, id) {
+    const dbRef = ref(this.db, `users/${uid}/${id}`);
+    remove(dbRef);
   }
 }
 

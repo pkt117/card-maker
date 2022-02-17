@@ -30,9 +30,11 @@ export default class AuthService {
   }
 
   onAuthChange(onAuthChanged) {
-    onAuthStateChanged(this.firebaseAuth, (user) => {
+    const unsubscribe = onAuthStateChanged(this.firebaseAuth, (user) => {
       onAuthChanged(user);
     });
+
+    return unsubscribe;
   }
 
   getProvider(providerName) {

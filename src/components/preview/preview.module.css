@@ -1,0 +1,26 @@
+@value makerGreen from "../../common/colors.css";
+
+.preview {
+  flex-basis: 50%;
+  overflow-y: scroll;
+}
+.preview::-webkit-scrollbar {
+  display: none;
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  color: makerGreen;
+}
+
+.cards {
+  list-style: none;
+  width: 100%;
+  padding: 0.5em 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
